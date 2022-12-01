@@ -1,7 +1,14 @@
 import React from 'react'
+import Todo from './Todo';
 
-export default function TodoList() {
+export default function TodoList({todoList,onCheckBtnClick,onDeleteBtnClick}) {
   return (
-    <p>Day la todo List</p>
+    <>
+    {
+        todoList.map((todo) => (
+            <Todo key={todo.id} todo={todo} onCheckBtnClick={onCheckBtnClick} onDeleteBtnClick={onDeleteBtnClick} />
+            ))}
+       
+    </>
   )
 }
