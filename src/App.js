@@ -36,12 +36,7 @@ function App() {
 // todo.id === id ? {...todo ,isdone:1}:todo 
     setTodoList(prevState => prevState.map((todo) => {
       if (todo.id === id){
-        if (todo.isdone === 0){
-          return {...todo ,isdone:1}
-        }
-        if (todo.isdone === 1){
-          return {...todo ,isdone:0}
-        }
+      return todo.isdone === 0 ? {...todo ,isdone:1}: {...todo ,isdone:0}  
       }
       return todo;
      
@@ -50,15 +45,9 @@ function App() {
       ;
   },[]);
 
-  const onDeleteBtnClick = useCallback((id) =>{
-    // todo.id === id ? {...todo ,isdone:1}:todo 
-        const storagedTodoList = window.localStorage.getItem(TODO_APP_STORAGE_KEY)
-
-        var sanitized = '[' + storagedTodoList.replace(/}{/g, '},{') + ']';
-        var res = JSON.parse(sanitized);
-        var test =  res.pop()    
-        const temp = test.find(item => item.id === id);
-        test = test.filter(function(item) {
+  const onDeleteBtnClick = useCallback((id) =>{          
+        const temp = todoList.find(item => item.id === id);
+        const test = todoList.filter(function(item) {
           return item !== temp
         })
 
@@ -66,7 +55,7 @@ function App() {
       
         
           
-      },[]);
+      },[todoList]);
       
   return( 
     <>   
